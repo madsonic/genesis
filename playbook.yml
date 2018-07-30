@@ -9,6 +9,11 @@
     loop:
         - vim
         - zsh
+        - wget
+        - curl
+        - pyenv
+        - pyenv-virtualenv
+        - tmux
 
   - name: Creating github dir
     file:
