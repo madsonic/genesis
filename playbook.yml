@@ -9,7 +9,6 @@
     loop:
         - vim
         - zsh
-        - iterm2
 
   - name: Creating github dir
     file:
