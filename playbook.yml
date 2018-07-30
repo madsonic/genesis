@@ -20,10 +20,16 @@
         path: ~/github
         state: directory
 
-  - name: "Getting dot config"
+  - name: Checking for dot config git
+    stat:
+        path: ~/github/config
+    register: config_dir
+
+  - name: Cloning dot config repo
     git:
         repo: "https://github.com/madsonic/config"
         dest: ~/github
+    when: not config_dir.stat.exists
 
   - name: Softlinking to dot config
     file:
