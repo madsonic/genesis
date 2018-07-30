@@ -25,11 +25,12 @@
         path: ~/github/config
     register: config_dir
 
-  - name: Cloning dot config repo
+  - name: Getting dot config repo
     git:
         repo: "https://github.com/madsonic/config"
-        dest: ~/github
-    when: not config_dir.stat.exists
+        dest: ~/github/config
+        clone: no
+        force: yes
 
   - name: Softlinking to dot config
     file:
