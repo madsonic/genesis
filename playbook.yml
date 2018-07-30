@@ -1,0 +1,73 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  tasks:
+  - name: Checking for homebrew
+    stat:
+        path: /usr/local/bin/brew
+    register: brew_installed
+    failed_when: not brew_installed.stat.exists
+
+  - name: Downloading homebrew
+    when: not brew_installed.stat.exists
+    get_url:
+        url: https://raw.githubusercontent.com/Homebrew/install/master/install
+        dest: /tmp/homebrew
+
+  - name: Installing homebrew
+    when: not brew_installed.stat.exists
+    command: /usr/bin/ruby -e /tmp/homebrew
+
+  - name: Installing packages
+    package: 
+        name: "{{ item }}"
+        state: present
+    loop:
+        - git
+        - vim
+        - zsh
+        - iterm2
+
+  - name: Creating github dir
+    file:
+        path: ~/github
+        state: directory
+
+  - name: "Getting dot config"
+    git:
+        repo: "https://github.com/madsonic/config"
+        dest: ~/github
+
+  - name: Softlinking to dot config
+    file:
+        path: "~/{{ item }}"
+        src: "~/github/config/{{ item }}"
+        state: link
+        force: yes
+    loop:
+        - ".vimrc"
+        - ".zshrc"
+        - ".gitconfig"
+        - ".git-completion.bash"
+
+  - name: "Change login shell to zsh"
+    user:
+      name: "{{ ansible_user_id }}"
+      shell: /bin/zsh
+    become: yes
+
+  - name: "Checking oh my zsh existence"
+    stat:
+      path: ~/.oh-my-zsh
+    register: zsh_installed
+
+  - name: "Downloading oh my zsh"
+    get_url:
+        url: https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh 
+        dest: /tmp/install-zsh.sh
+        mode: u+rwx
+    when: zsh_installed.stat.exists == false
+  
+  - name: "Installing oh my zsh"
+    command: /tmp/install-zsh.sh
+    when: zsh_installed.stat.exists == false
