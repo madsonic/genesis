@@ -43,6 +43,7 @@
         - ".zshrc"
         - ".gitconfig"
         - ".git-completion.bash"
+        - ".tmux.conf"
 
   - name: "Change login shell to zsh"
     user:
@@ -65,3 +66,13 @@
   - name: "Installing oh my zsh"
     command: /tmp/install-zsh.sh
     when: zsh_installed.stat.exists == false
+
+  - name: Creating tmux plugin dir
+    file:
+        path: ~/.tmux/plugins
+        state: directory
+
+  - name: Installing tmux plugin manager
+    git:
+        repo: "https//github.com/tmux-plugins/tpm"
+        dest: ~/.tmux/plugins/tpm
