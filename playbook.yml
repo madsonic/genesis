@@ -72,5 +72,5 @@
 
   - name: Installing tmux plugin manager
     git:
-        repo: "https//github.com/tmux-plugins/tpm"
+        repo: "https://github.com/tmux-plugins/tpm"
         dest: ~/.tmux/plugins/tpm
