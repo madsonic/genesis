@@ -63,7 +63,7 @@
     when: zsh_installed.stat.exists == false
   
   - name: "Installing oh my zsh"
-    command: /tmp/install-zsh.sh
+    command: sh -c /tmp/install-zsh.sh
     when: zsh_installed.stat.exists == false
 
   - name: Creating tmux plugin dir
