@@ -75,3 +75,12 @@
     git:
         repo: "https://github.com/tmux-plugins/tpm"
         dest: ~/.tmux/plugins/tpm
+
+  - name: Installing apps
+    command: "brew cask install {{ item }}"
+    loop:
+        - karabiner-elements
+        - alfred
+        - spotify
+        - google-chrome
+        - iterm2
