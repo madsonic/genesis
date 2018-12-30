@@ -12,9 +12,6 @@
         - wget
         - curl
         - tmux
-        - terraform
-        - packer
-        - docker
         - kubernetes-cli
 
   - name: Creating github dir
