@@ -3,4 +3,4 @@
 brew update
 brew install git ansible
 
-ansible-playbook playbook -v
+ansible-playbook playbook.yml -v --ask-become-pass
