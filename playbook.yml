@@ -13,6 +13,11 @@
         - curl
         - tmux
         - kubernetes-cli
+        - docker
+        - terraform
+        - terragrunt
+        - tree
+        - gpg
 
   - name: Creating github dir
     file:
@@ -85,4 +90,3 @@
         - google-chrome
         - iterm2
         - spectacle
-        - sketch
