@@ -18,6 +18,8 @@
         - terragrunt
         - tree
         - gpg
+        - jq
+        - yq
 
   - name: Creating github dir
     file:
