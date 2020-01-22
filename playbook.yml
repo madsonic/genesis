@@ -20,6 +20,7 @@
         - gpg
         - jq
         - yq
+        - pyenv
 
   - name: Creating github dir
     file:
