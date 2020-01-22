@@ -21,6 +21,7 @@
         - jq
         - yq
         - pyenv
+        - pyenv-virtualenv
 
   - name: Creating github dir
     file:
